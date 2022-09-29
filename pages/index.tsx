@@ -1,26 +1,25 @@
+import { motion } from "framer-motion";
 import type { NextPage } from "next";
 import Bio from "../components/Bio";
+import Intro from "../components/Intro";
 import Layout from "../components/Layout";
 import ProjectsTimeline from "../components/ProjectsTimeline";
 import useTypingAnimation from "../utils/useTypingAnimation";
 
-const WhatIAm = ["an aspiring developer", "your developer"];
 const Home: NextPage = () => {
-  const typing = useTypingAnimation(WhatIAm);
-
   return (
     <Layout>
-      <div className=" pt-16  h-screen  w-full flex justify-center items-center flex-col p-4">
-        <div className="text-4xl  md:text-6xl font-bold text-center">
-          Hi I'm{" "}
-          <span className=" text-cyan-400 hover:animate-pulse">Duc Do</span>
+      <div className="w-screen h-screen overflow-scroll snap-y snap-mandatory">
+        <div className="snap-start">
+          <Intro />
         </div>
-        <div className="text-2xl text-center   md:text-4xl">
-          I'm <span className="blinking-cursor">{typing}</span>
+        <div className="py-16 scroll-mb-32 snap-start">
+          <Bio />
+        </div>
+        <div className="py-16 snap-start snap-normal">
+          <ProjectsTimeline />
         </div>
       </div>
-      <Bio />
-      <ProjectsTimeline />
     </Layout>
   );
 };

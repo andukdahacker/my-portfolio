@@ -6,10 +6,18 @@
 
 @layer base {
   html {
-    @apply font-robotoMono w-full h-full p-0 m-0 scroll-smooth;
+    @apply w-full h-full p-0 m-0 font-robotoMono scroll-smooth overscroll-none;
   }
   body {
-    @apply bg-white text-black dark:bg-[#202023] dark:text-[#cbcbcb] w-full h-full;
+    @apply bg-white text-black dark:bg-[#202023] dark:text-[#cbcbcb] w-full h-full overscroll-none;
+  }
+
+  h1 {
+    @apply text-5xl font-bold;
+  }
+
+  h2 {
+    @apply text-3xl font-semibold;
   }
 }
 
@@ -38,5 +46,13 @@
     50% {
       opacity: 0;
     }
+  }
+
+  .dashed-box {
+    @apply rounded-md border border-dashed border-black dark:border-[#cbcbcb] p-2 mt-2;
+  }
+
+  .nextEl {
+    @apply w-10 h-10 bg-red-200;
   }
 }

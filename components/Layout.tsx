@@ -1,5 +1,4 @@
 import { PropsWithChildren } from "react";
-
 import Navbar from "./Navbar";
 
 interface LayoutProps {
@@ -8,10 +7,10 @@ interface LayoutProps {
 
 const Layout = ({ children }: PropsWithChildren<LayoutProps>) => {
   return (
-    <div className="">
+    <>
       <Navbar />
       {children}
-    </div>
+    </>
   );
 };
 

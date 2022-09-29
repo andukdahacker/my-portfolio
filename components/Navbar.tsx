@@ -1,37 +1,54 @@
 import Link from "next/link";
 import { TiThMenu } from "react-icons/ti";
-import { GiGecko } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import ThemeChanger from "./ThemeChanger";
-import { useState } from "react";
-import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { motion, useScroll } from "framer-motion";
+import NavbarSidebar from "./NavbarSidebar";
 
 const Navbar = () => {
-  const { theme } = useTheme();
+  const router = useRouter();
   const [sideNav, setSideNav] = useState(false);
 
   return (
-    <div
-      className={` fixed h-16 w-full z-50  bg-transparent bg-opacity-40 backdrop-filter backdrop-blur bg-clip-padding py-4 px-4 md:px-20 lg:px-40 flex justify-between items-center `}
+    <motion.div
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.2 }}
+      className={` fixed h-16 w-full z-10 bg-transparent bg-opacity-40 backdrop-filter backdrop-blur bg-clip-padding py-4 px-4 md:px-20 lg:px-40 flex justify-between items-center`}
     >
       <Link href={"/"}>
         <a>
-          <div className="font-bold text-4xl flex text-cyan-400">
-            <div className=" text-cyan-400 hover:animate-ping">
-              <GiGecko />
-            </div>
-            DD
-          </div>
+          <motion.div className="flex text-4xl font-bold text-cyan-400">
+            D
+            <motion.div
+              initial={{ x: -20 }}
+              animate={{ x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex text-4xl font-bold text-cyan-400"
+            >
+              D
+            </motion.div>
+          </motion.div>
         </a>
       </Link>
-      <div className="hidden sm:flex">
+      <div className="hidden sm:flex sm:w-1/4 sm:justify-between">
         <Link href={"/projects"}>
-          <a className="hover:underline decoration-2 underline-offset-4 decoration-white dark:decoration-black">
+          <a
+            className={` ${
+              router.asPath == "/projects" ? "underline " : "hover:underline"
+            }  decoration-2 underline-offset-4 decoration-black dark:decoration-white`}
+          >
             Projects
           </a>
         </Link>
-        <Link href={"/"}>
-          <a className="ml-10 hover:underline decoration-2 underline-offset-4 decoration-white dark:decoration-black ">
+        <Link href={"/blogs"}>
+          <a
+            className={` ${
+              router.asPath == "/blogs" ? "underline" : "hover:underline"
+            }  decoration-2 underline-offset-4 decoration-black dark:decoration-white `}
+          >
             Blogs
           </a>
         </Link>
@@ -40,46 +57,20 @@ const Navbar = () => {
       <div className="hidden sm:flex ">
         <ThemeChanger />
       </div>
-      <button
+
+      <motion.button
+        initial={{ x: 100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
         type="button"
         className={`${sideNav ? "hidden" : "visible"} sm:hidden`}
         onClick={() => setSideNav(true)}
       >
         <TiThMenu size={30} />
-      </button>
+      </motion.button>
 
-      <div
-        className={`${
-          sideNav ? "visible" : "hidden"
-        } glass-light dark:glass-dark absolute right-0 top-0 h-screen w-3/4 p-2 flex flex-col sm:hidden`}
-      >
-        <button
-          className="w-full flex justify-end items-center p-5"
-          onClick={() => setSideNav(false)}
-        >
-          <AiOutlineClose
-            color={theme == "dark" ? "white" : "black"}
-            size={20}
-          />
-        </button>
-
-        <div className="flex flex-col w-full">
-          <Link href={"/projects"}>
-            <a className="hover:underline w-full decoration-2 underline-offset-4 dark:decoration-white decoration-black">
-              Projects
-            </a>
-          </Link>
-          <Link href={"/"}>
-            <a className=" mt-5 hover:underline w-full decoration-2 underline-offset-4 decoration-black dark:decoration-white  ">
-              Blogs
-            </a>
-          </Link>
-        </div>
-        <div className="mt-5 w-full flex justify-center items-center">
-          <ThemeChanger />
-        </div>
-      </div>
-    </div>
+      <NavbarSidebar setSideNav={setSideNav} sideNav={sideNav} />
+    </motion.div>
   );
 };
 

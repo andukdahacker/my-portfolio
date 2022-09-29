@@ -9,8 +9,8 @@ import { timelineData } from "../utils/timelineData";
 const ProjectsTimeline = () => {
   const { theme } = useTheme();
   return (
-    <div className="h-full w-full min-h-screen">
-      <div className=" text-center  uppercase font-bold text-4xl">
+    <div className="w-full h-full min-h-screen">
+      <div className="text-4xl font-bold text-center uppercase ">
         My coding journey
       </div>
       <VerticalTimeline lineColor={theme == "light" ? "black" : "white"}>
